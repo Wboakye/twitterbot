@@ -5,9 +5,14 @@ import tweepy
 import logging
 from config import create_api
 import json
+import os
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
+
+
+tracked_words_string = os.environ.get("TRACKED_WORDS", 3)
+tracked_words_list = tracked_words_list.split()
 
 
 class FavRetweetListener(tweepy.StreamListener):
@@ -46,4 +51,4 @@ def main(keywords):
 
 
 if __name__ == "__main__":
-    main(["Python", "Javascript", "JS", "dotnet"])
+    main(tracked_words_list)
