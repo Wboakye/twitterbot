@@ -12,7 +12,7 @@ logger = logging.getLogger()
 
 
 tracked_words_string = os.environ.get("TRACKED_WORDS", 3)
-tracked_words_list = tracked_words_list.split()
+tracked_words_list = tracked_words_string.split()
 
 
 class FavRetweetListener(tweepy.StreamListener):
