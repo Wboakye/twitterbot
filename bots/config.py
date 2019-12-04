@@ -7,12 +7,11 @@ logger = logging.getLogger()
 
 
 def create_api():
-    s3 = S3Connection(os.environ['S3_KEY'], os.environ['S3_SECRET'])
-    
-    consumer_key = os.environ.get("CONSUMER_KEY",3) 
-    consumer_secret = os.environ.get("CONSUMER_SECRET",3) 
-    access_token = os.environ.get("ACCESS_TOKEN",3) 
-    access_token_secret = os.environ.get("ACCESS_TOKEN_SECRET",3) 
+
+    consumer_key = os.environ.get("CONSUMER_KEY", 3)
+    consumer_secret = os.environ.get("CONSUMER_SECRET", 3)
+    access_token = os.environ.get("ACCESS_TOKEN", 3)
+    access_token_secret = os.environ.get("ACCESS_TOKEN_SECRET", 3)
 
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
