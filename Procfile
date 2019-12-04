@@ -1,2 +1,2 @@
-worker: python bots/favretweet.py
+worker: python bots/followfollowers.py
 web: python server.py
