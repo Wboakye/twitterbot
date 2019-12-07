@@ -6,7 +6,7 @@ import logging
 from config import create_api
 import json
 import os
-import pymongo import MongoClient
+from pymongo import MongoClient
 from crontab import CronTab
 from datetime import datetime
 
@@ -51,19 +51,19 @@ class FavRetweetListener(tweepy.StreamListener):
 
     def dblogger(self):
         cron = CronTab(user='username')
-        job = cron.new(command= screenshot(), comment='comment')
+        job = cron.new(command=screenshot(), comment='comment')
         job.hour.on(0)
         job.hour.also.on(6)
         job.hour.also.on(12)
         job.hour.also.on(18)
-    
+
     def screenshot(self):
         now = datetime.now()
         current_time = now.strftime("%H:%M:%S")
         current_date = datetime.date.today()
 
-        db.posts.insert_one({"date": current_date, "time": current_time, tweetCount: self.me.statuses_count ,"followerCount": self.me.followers_count})
-
+        db.posts.insert_one({"date": current_date, "time": current_time,
+                             tweetCount: self.me.statuses_count, "followerCount": self.me.followers_count})
 
 
 def main(keywords):
@@ -75,6 +75,7 @@ def main(keywords):
 
 if __name__ == "__main__":
     main(tracked_words_list)
+
 
 def main(keywords):
     api = create_api()
