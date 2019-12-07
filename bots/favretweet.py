@@ -24,6 +24,7 @@ class FavRetweetListener(tweepy.StreamListener):
     def __init__(self, api, client):
         self.api = api
         self.me = api.me()
+        client = MongoClient(atlas_url)
         self.db = client.boakyeTweets
         dblogger()
 
@@ -79,8 +80,7 @@ if __name__ == "__main__":
 
 def main(keywords):
     api = create_api()
-    client = MongoClient(atlas_url)
-    tweets_listener = FavRetweetListener(api, client)
+    tweets_listener = FavRetweetListener(api)
     stream = tweepy.Stream(api.auth, tweets_listener)
     stream.filter(track=keywords, languages=["en"])
 
