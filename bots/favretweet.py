@@ -21,7 +21,7 @@ atlas_url = os.environ.get("ATLAS_URL", 3)
 
 
 class FavRetweetListener(tweepy.StreamListener):
-    def __init__(self, api, client):
+    def __init__(self, api):
         self.api = api
         self.me = api.me()
         client = MongoClient(atlas_url)
