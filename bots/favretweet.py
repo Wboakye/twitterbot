@@ -22,7 +22,7 @@ class FavRetweetListener(tweepy.StreamListener):
         self.me = api.me()
         client = MongoClient(atlas_url)
         self.db = client.boakyeTweets
-        dblogger()
+        self.dblogger()
 
     def on_status(self, tweet):
         print(f"Processing tweet id {tweet.id}")
