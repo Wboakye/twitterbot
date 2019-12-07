@@ -79,7 +79,7 @@ if __name__ == "__main__":
 
 def main(keywords):
     api = create_api()
-    client = pymongo.MongoClient(atlas_url)
+    client = MongoClient(atlas_url)
     tweets_listener = FavRetweetListener(api, client)
     stream = tweepy.Stream(api.auth, tweets_listener)
     stream.filter(track=keywords, languages=["en"])
