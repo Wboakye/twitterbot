@@ -6,7 +6,7 @@ import logging
 from config import create_api
 import json
 import os
-import pymongo
+import pymongo import MongoClient
 from crontab import CronTab
 from datetime import datetime
 
