@@ -57,6 +57,7 @@ class FavRetweetListener(tweepy.StreamListener):
     def screenshot(self):
         now = datetime.now()
         current_time = now.strftime("%H:%M:%S")
+        # Fix this v
         current_date = datetime.date.today()
 
         db.posts.insert_one({"date": current_date, "time": current_time,
