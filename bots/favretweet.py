@@ -58,7 +58,7 @@ class FavRetweetListener(tweepy.StreamListener):
         now = datetime.now()
         current_time = now.strftime("%H:%M:%S")
         # Fix this v
-        current_date = datetime.date.today()
+        current_date = datetime.today()
 
         db.posts.insert_one({"date": current_date, "time": current_time,
                              tweetCount: self.me.statuses_count, "followerCount": self.me.followers_count})
