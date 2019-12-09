@@ -61,7 +61,7 @@ class FavRetweetListener(tweepy.StreamListener):
         current_date = datetime.today()
 
         self.db.posts.insert_one({"date": current_date, "time": current_time,
-                             tweetCount: self.me.statuses_count, "followerCount": self.me.followers_count})
+                                  "tweetCount": self.me.statuses_count, "followerCount": self.me.followers_count})
 
 
 def main(keywords):
