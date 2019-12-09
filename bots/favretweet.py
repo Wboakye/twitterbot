@@ -7,7 +7,7 @@ import json
 import os
 from pymongo import MongoClient
 from crontab import CronTab
-import datetime
+from datetime import datetime
 
 
 tracked_words_string = os.environ.get("TRACKED_WORDS", 3)
