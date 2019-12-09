@@ -73,14 +73,3 @@ def main(keywords):
 
 if __name__ == "__main__":
     main(tracked_words_list)
-
-
-def main(keywords):
-    api = create_api()
-    tweets_listener = FavRetweetListener(api)
-    stream = tweepy.Stream(api.auth, tweets_listener)
-    stream.filter(track=keywords, languages=["en"])
-
-
-if __name__ == "__main__":
-    main(tracked_words_list)
