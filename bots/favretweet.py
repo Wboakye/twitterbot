@@ -41,7 +41,7 @@ class FavRetweetListener(tweepy.StreamListener):
             try:
                 tweet.retweet()
             except Exception as e:
-                print("Error retweet")
+                print("Error on retweet")
 
     def on_error(self, status):
         print(status)
