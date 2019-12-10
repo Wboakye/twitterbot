@@ -8,6 +8,7 @@ import os
 from pymongo import MongoClient
 import schedule 
 import time
+import threading
 from datetime import datetime
 
 
@@ -23,7 +24,8 @@ class FavRetweetListener(tweepy.StreamListener):
         self.me = api.me()
         client = MongoClient(atlas_url)
         self.db = client.boakyeTweets
-        self.dblogger()
+        thread = threading.Thread(target=self.dblogger, args=())
+        thread.start()
 
     def on_status(self, tweet):
         print(f"Processing tweet id {tweet.id}")
@@ -52,6 +54,7 @@ class FavRetweetListener(tweepy.StreamListener):
         while True: 
             schedule.run_pending() 
             time.sleep(1) 
+            
     def screenshot(self):
         now = datetime.now()
         current_time = now.strftime("%H:%M:%S")
