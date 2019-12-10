@@ -48,7 +48,7 @@ class FavRetweetListener(tweepy.StreamListener):
         print(status)
 
     def dblogger(self):
-        schedule.every().day.at("3:30").do(self.screenshot())
+        schedule.every().day.at("03:30").do(self.screenshot())
 
         #job.hour.on(0, 6, 12, 18, 23)
 
