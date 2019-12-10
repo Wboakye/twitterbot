@@ -47,7 +47,7 @@ class FavRetweetListener(tweepy.StreamListener):
         print(status)
 
     def dblogger(self):
-        cron = CronTab(user="User")
+        cron = CronTab(user=True)
         job = cron.new(command=self.screenshot())
         job.minute.every(2)
         cron.write()
@@ -56,7 +56,7 @@ class FavRetweetListener(tweepy.StreamListener):
     def screenshot(self):
         now = datetime.now()
         current_time = now.strftime("%H:%M:%S")
-        current_date = datetime.today()
+        current_date = datetime.date.today()
 
         self.db.posts.insert_one({"date": current_date, "time": current_time,
                                   "tweetCount": self.me.statuses_count, "followerCount": self.me.followers_count})
