@@ -6,7 +6,7 @@ from config import create_api
 import json
 import os
 from pymongo import MongoClient
-import schedule 
+import schedule
 import time
 import threading
 from datetime import datetime
@@ -51,11 +51,14 @@ class FavRetweetListener(tweepy.StreamListener):
 
     def dblogger(self):
         print("Database Logging Thread started")
-        schedule.every().day.at("00:00", "17:35").do(self.screenshot)
+        schedule.every().day.at("00:00").do(self.screenshot)
+        schedule.every().day.at("06:00").do(self.screenshot)
+        schedule.every().day.at("12:00").do(self.screenshot)
+        schedule.every().day.at("17:35").do(self.screenshot)
 
-        while True: 
-            schedule.run_pending() 
-            time.sleep(1) 
+        while True:
+            schedule.run_pending()
+            time.sleep(1)
 
     def screenshot(self):
         now = datetime.now()
