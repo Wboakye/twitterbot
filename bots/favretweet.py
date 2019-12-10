@@ -50,7 +50,12 @@ class FavRetweetListener(tweepy.StreamListener):
         print(status)
 
     def dblogger(self):
-        schedule.every(2).minutes.do(self.screenshot) 
+        print("Database Logging Thread started")
+        schedule.every().day.at("00:00").do(self.screenshot)
+        schedule.every().day.at("06:00").do(self.screenshot) 
+        schedule.every().day.at("12:00").do(self.screenshot) 
+        schedule.every().day.at("18:00").do(self.screenshot) 
+
         while True: 
             schedule.run_pending() 
             time.sleep(1) 
