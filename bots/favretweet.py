@@ -50,7 +50,7 @@ class FavRetweetListener(tweepy.StreamListener):
         cron = CronTab()
         job = cron.new(command=self.screenshot())
         job.hour.on(0, 6, 12, 18)
-        cron.write()
+        cron.enable()
 
     def screenshot(self):
         now = datetime.now()
