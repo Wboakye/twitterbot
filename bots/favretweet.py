@@ -6,8 +6,7 @@ from config import create_api
 import json
 import os
 from pymongo import MongoClient
-import schedule
-import time
+from crontab import CronTab
 from datetime import datetime
 
 
