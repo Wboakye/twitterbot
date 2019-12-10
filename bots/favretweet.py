@@ -47,11 +47,10 @@ class FavRetweetListener(tweepy.StreamListener):
         print(status)
 
     def dblogger(self):
-        cron = CronTab(user=False)
+        cron = CronTab()
         job = cron.new(command=self.screenshot())
-        job.minute.every(2)
+        job.hour.on(0, 6, 12, 18)
         cron.write()
-        #job.hour.on(0, 6, 12, 18, 23)
 
     def screenshot(self):
         now = datetime.now()
