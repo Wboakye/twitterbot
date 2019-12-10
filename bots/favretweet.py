@@ -48,7 +48,7 @@ class FavRetweetListener(tweepy.StreamListener):
         print(status)
 
     def dblogger(self):
-        schedule.every(10).minutes.do(self.screenshot()) 
+        schedule.every(10).minutes.do(self.screenshot) 
         while True: 
             schedule.run_pending() 
             time.sleep(1) 
