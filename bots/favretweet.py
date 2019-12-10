@@ -50,6 +50,7 @@ class FavRetweetListener(tweepy.StreamListener):
         cron = CronTab()
         job = cron.new(command=self.screenshot())
         job.minute.every(2)
+        job.write()
         #job.hour.on(0, 6, 12, 18, 23)
 
     def screenshot(self):
@@ -59,7 +60,7 @@ class FavRetweetListener(tweepy.StreamListener):
 
         self.db.posts.insert_one({"date": current_date, "time": current_time,
                                   "tweetCount": self.me.statuses_count, "followerCount": self.me.followers_count})
-        print("Screenshot Taken")
+        print("+-+-+-+ SCREENSHOT TAKEN +-+-+-+")
 
 
 def main(keywords):
