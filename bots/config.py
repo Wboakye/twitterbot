@@ -6,7 +6,6 @@ logger = logging.getLogger()
 
 
 def create_api():
-
     consumer_key = os.environ.get("CONSUMER_KEY", 3)
     consumer_secret = os.environ.get("CONSUMER_SECRET", 3)
     access_token = os.environ.get("ACCESS_TOKEN", 3)

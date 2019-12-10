@@ -55,7 +55,6 @@ class FavRetweetListener(tweepy.StreamListener):
         schedule.every().day.at("06:00").do(self.screenshot)
         schedule.every().day.at("12:00").do(self.screenshot)
         schedule.every().day.at("18:00").do(self.screenshot)
-        schedule.every().day.at("18:10").do(self.screenshot)
 
         while True:
             schedule.run_pending()
