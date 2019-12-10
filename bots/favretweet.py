@@ -6,7 +6,8 @@ from config import create_api
 import json
 import os
 from pymongo import MongoClient
-from crontab import CronTab
+import schedule
+import time
 from datetime import datetime
 
 
@@ -47,19 +48,18 @@ class FavRetweetListener(tweepy.StreamListener):
         print(status)
 
     def dblogger(self):
-        cron = CronTab()
-        job = cron.new(command=self.screenshot())
-        job.minute.on(2)
+        schedule.every().day.at("3:30").do(self.screenshot())
+
         #job.hour.on(0, 6, 12, 18, 23)
 
     def screenshot(self):
         now = datetime.now()
         current_time = now.strftime("%H:%M:%S")
-        # Fix this v
         current_date = datetime.today()
 
         self.db.posts.insert_one({"date": current_date, "time": current_time,
                                   "tweetCount": self.me.statuses_count, "followerCount": self.me.followers_count})
+        print("Screenshot Taken")
 
 
 def main(keywords):
