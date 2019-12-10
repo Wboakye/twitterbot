@@ -49,7 +49,9 @@ class FavRetweetListener(tweepy.StreamListener):
 
     def dblogger(self):
         schedule.every(10).minutes.do(self.screenshot()) 
-
+        while True: 
+            schedule.run_pending() 
+            time.sleep(1) 
     def screenshot(self):
         now = datetime.now()
         current_time = now.strftime("%H:%M:%S")
