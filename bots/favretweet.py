@@ -22,6 +22,7 @@ class FavRetweetListener(tweepy.StreamListener):
     def __init__(self, api):
         self.api = api
         self.me = api.me()
+        self.like = False
         client = MongoClient(atlas_url)
         self.db = client.boakyeTweets
         thread = threading.Thread(target=self.dblogger, args=())
@@ -33,19 +34,21 @@ class FavRetweetListener(tweepy.StreamListener):
                 tweet.user.id == self.me.id:
             # This tweet is a reply or I'm its author so, ignore it
             return
-        if not tweet.favorited:
-            # Mark it as Liked, since we have not done it yet
-            try:
-                tweet.favorite()
-            except Exception as e:
-                print("Error on like")
-        if not tweet.retweeted:
-            # Retweet, since we have not retweeted it yet
-            try:
-                tweet.retweet()
-            except Exception as e:
-                print("Error on retweet")
-        time.sleep(121)
+        if self.like == True:
+            if not tweet.favorited:
+                try:
+                    tweet.favorite()
+                except Exception as e:
+                    print("Error on like")
+            self.like = False
+        else:
+            if not tweet.retweeted:
+                try:
+                    tweet.retweet()
+                except Exception as e:
+                    print("Error on retweet")
+            self.like = True
+        time.sleep(65)
 
     def on_error(self, status):
         print(status)
