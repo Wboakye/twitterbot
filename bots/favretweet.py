@@ -43,6 +43,7 @@ class FavRetweetListener(tweepy.StreamListener):
                     print("Tweet liked")
                 except Exception as e:
                     print("Error on like")
+                    print(e)
             self.like = False
         else:
             if not tweet.retweeted:
