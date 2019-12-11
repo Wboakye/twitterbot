@@ -45,6 +45,7 @@ class FavRetweetListener(tweepy.StreamListener):
                     print("Error on like")
                     print(e)
             self.like = False
+            time.sleep(65)
         else:
             if not tweet.retweeted:
                 try:
@@ -54,7 +55,8 @@ class FavRetweetListener(tweepy.StreamListener):
                     print("Error on retweet")
                     print(e)
             self.like = True
-        time.sleep(65)
+            time.sleep(65)
+        
 
     def on_error(self, status):
         print(status)
