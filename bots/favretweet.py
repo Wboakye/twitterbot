@@ -2,7 +2,6 @@
 # tweepy-bots/bots/favretweet.py
 
 import tweepy
-from config import create_api
 import json
 import os
 from pymongo import MongoClient
@@ -11,6 +10,7 @@ import time
 import threading
 from datetime import datetime
 
+from config import create_api
 
 tracked_words_string = os.environ.get("TRACKED_WORDS", 3)
 tracked_words_list = tracked_words_string.split()
@@ -45,6 +45,7 @@ class FavRetweetListener(tweepy.StreamListener):
                 tweet.retweet()
             except Exception as e:
                 print("Error on retweet")
+        time.sleep(180)
 
     def on_error(self, status):
         print(status)
