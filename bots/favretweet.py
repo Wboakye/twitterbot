@@ -30,9 +30,11 @@ class FavRetweetListener(tweepy.StreamListener):
 
     def on_status(self, tweet):
         print(f"Processing tweet id {tweet.id}")
-        if tweet.in_reply_to_status_id is not None or \
-                tweet.user.id == self.me.id:
-            # This tweet is a reply or I'm its author so, ignore it
+        if tweet.in_reply_to_status_id is not None:
+            print("This tweet is a reply -- ignored")
+            return
+        if tweet.user.id == self.me.id:
+            print("I am the author of this tweet -- ignored")
             return
         if self.like == True:
             if not tweet.favorited:
