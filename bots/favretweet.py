@@ -73,9 +73,9 @@ class FavRetweetListener(tweepy.StreamListener):
 
     def screenshot(self):
         current_time = datetime.now().strftime("%H:%M:%S")
-        current_date_y = datetime.today().strftime('%y%m%d')
-        current_date_m = datetime.today().strftime('%y%m%d')
-        current_date_d = datetime.today().strftime('%y%m%d')
+        current_date_y = datetime.today().strftime('%y')
+        current_date_m = datetime.today().strftime('%m')
+        current_date_d = datetime.today().strftime('%d')
 
         self.db.posts.insert_one({"year": current_date_y, "month": current_date_m, "day": current_date_d, "time": current_time,
                                   "tweetCount": self.me.statuses_count, "followerCount": self.me.followers_count})
