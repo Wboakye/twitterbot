@@ -45,7 +45,7 @@ class FavRetweetListener(tweepy.StreamListener):
                     print("Error on like")
                     print(e)
             self.like = False
-            #time.sleep(65)
+            # time.sleep(65)
         else:
             if not tweet.retweeted:
                 try:
@@ -55,8 +55,7 @@ class FavRetweetListener(tweepy.StreamListener):
                     print("Error on retweet")
                     print(e)
             self.like = True
-            #time.sleep(65)
-        
+            # time.sleep(65)
 
     def on_error(self, status):
         print(status)
@@ -74,9 +73,11 @@ class FavRetweetListener(tweepy.StreamListener):
 
     def screenshot(self):
         current_time = datetime.now().strftime("%H:%M:%S")
-        current_date = datetime.today().strftime('%y%m%d')
+        current_date_y = datetime.today().strftime('%y%m%d')
+        current_date_m = datetime.today().strftime('%y%m%d')
+        current_date_d = datetime.today().strftime('%y%m%d')
 
-        self.db.posts.insert_one({"date": current_date, "time": current_time,
+        self.db.posts.insert_one({"year": current_date_y, "month": current_date_m, "day": current_date_d, "time": current_time,
                                   "tweetCount": self.me.statuses_count, "followerCount": self.me.followers_count})
         print("+-+-+-+ SCREENSHOT TAKEN +-+-+-+")
 
