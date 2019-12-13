@@ -64,7 +64,7 @@ class FavRetweetListener(tweepy.StreamListener):
         print("Database Logging Thread started")
         schedule.every().day.at("00:00").do(self.screenshot, time=0)
         schedule.every().day.at("06:00").do(self.screenshot, time=1)
-        schedule.every().day.at("12:07").do(self.screenshot, time=2)
+        schedule.every().day.at("12:00").do(self.screenshot, time=2)
         schedule.every().day.at("18:00").do(self.screenshot, time=3)
 
         while True:
