@@ -64,7 +64,7 @@ class FavRetweetListener(tweepy.StreamListener):
         print("Database Logging Thread started")
         schedule.every().day.at("00:00").do(self.screenshot, time=0)
         schedule.every().day.at("06:00").do(self.screenshot, time=1)
-        schedule.every().day.at("12:00").do(self.screenshot, time=2)
+        schedule.every().day.at("12:07").do(self.screenshot, time=2)
         schedule.every().day.at("18:00").do(self.screenshot, time=3)
 
         while True:
@@ -75,12 +75,14 @@ class FavRetweetListener(tweepy.StreamListener):
         current_time = datetime.now().strftime("%H:%M:%S")
         current_date = datetime.today().strftime('%y%m%d')
         if time == 0:
-            self.db.posts.insert_one({"date": current_date, "screenshots": [{"time": current_time, "tweetCount": self.me.statuses_count, "followerCount": self.me.followers_count}]})
+            self.db.posts.insert_one({"date": current_date, "screenshots": [
+                                     {"time": current_time, "tweetCount": self.me.statuses_count, "followerCount": self.me.followers_count}]})
         else:
             collection_item = self.db.posts.find_one({"date": current_date})
-            new_collection_item = {"time": current_time, "tweetCount": self.me.statuses_count, "followerCount": self.me.followers_count}
-            collection_item.screenshots.append(new_collection_item)
-            self.db.posts.replace_one({"date": current_date}, collection_item)    
+            new_collection_item = {
+                "time": current_time, "tweetCount": self.me.statuses_count, "followerCount": self.me.followers_count}
+            collection_item["screenshots"].append(new_collection_item)
+            self.db.posts.replace_one({"date": current_date}, collection_item)
 
         print("+-+-+-+ SCREENSHOT TAKEN +-+-+-+")
 
