@@ -77,7 +77,7 @@ class FavRetweetListener(tweepy.StreamListener):
         if time == 0:
             self.db.posts.insert_one({"date": current_date, "screenshots": [{"time": current_time, "tweetCount": self.me.statuses_count, "followerCount": self.me.followers_count}]})
         else:
-            collection_item = self.db.posts.find_one({"date": current_date})
+            collection_item = self.db.posts.replace_one({"date": current_date})
             new_collection_item = {"time": current_time, "tweetCount": self.me.statuses_count, "followerCount": self.me.followers_count}
             collection_item.screenshots.append(new_collection_item)
             self.db.posts.update_one({"date": current_date}, collection_item)    
